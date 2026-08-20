@@ -2,10 +2,13 @@
 
 **helix-core · planning ledgers** — a single-file, dependency-free HTML timeline for browsing releases, issues, and labels along a horizontally scrollable rail.
 
+> **Requires a local web server.** `ledger.html` loads its data via `fetch('./data.json')`, which browsers block on a plain `file://` page. Double-clicking the file will not work — see Usage below. If you need something that opens directly with no server, use [`ledger-static-preview.html`](ledger-static-preview.html) instead.
+
 ## Files
 
 - [`ledger.html`](ledger.html) — the current viewer. Renders entirely from [`data.json`](data.json) at load time — no build step, but it does need to be served over HTTP (see Usage).
 - [`data.json`](data.json) — all card and telemetry data: header/sync banner, stats bar, "just finished" / "what's next" strip, and the full release timeline (detours, roadmap items, marathons). Edit this file to point the viewer at your own data; the shape is documented inline by example.
+- [`ledger-static-preview.html`](ledger-static-preview.html) — a frozen, self-contained snapshot of the original `ledger.html` with its data baked into the markup. Opens directly from disk (no server needed) but does not read `data.json`, so it won't reflect edits made there.
 - [`ledger-v1-panels.html`](ledger-v1-panels.html) — earlier panel-based layout, kept for reference.
 - [`Planning Ledgers.dc.html`](Planning%20Ledgers.dc.html) — the source artboard for the design, authored in the `.dc.html` (Claude Design canvas) format.
 - [`support.js`](support.js) — generated runtime required by the `.dc.html` artboard (`dc-runtime`). Do not edit directly.
