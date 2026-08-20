@@ -7,23 +7,14 @@
 <title>helix-core · planning ledgers</title>
 <style>
 :root{
-  --bg:oklch(0.985 0.004 250);--card:oklch(1 0 0);--sunk:oklch(0.965 0.004 250);
-  --line:oklch(0.895 0.008 250);--line2:oklch(0.82 0.01 250);
-  --ink:oklch(0.26 0.014 250);--ink2:oklch(0.475 0.012 250);--ink3:oklch(0.615 0.011 250);
-  --red:oklch(0.505 0.185 25);--redbg:oklch(0.955 0.032 25);--amber:oklch(0.545 0.135 68);
-  --blue:oklch(0.505 0.135 252);--green:oklch(0.475 0.105 155);
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    --bg:oklch(0.168 0.008 250);--card:oklch(0.212 0.009 250);--sunk:oklch(0.19 0.008 250);
-    --line:oklch(0.295 0.011 250);--line2:oklch(0.38 0.014 250);
-    --ink:oklch(0.925 0.006 250);--ink2:oklch(0.715 0.011 250);--ink3:oklch(0.565 0.012 250);
-    --red:oklch(0.685 0.185 25);--redbg:oklch(0.275 0.06 25);--amber:oklch(0.775 0.135 78);
-    --blue:oklch(0.715 0.115 252);--green:oklch(0.7 0.105 155);
-  }
+  --bg:oklch(0.168 0.008 250);--card:oklch(0.212 0.009 250);--sunk:oklch(0.19 0.008 250);
+  --line:oklch(0.295 0.011 250);--line2:oklch(0.38 0.014 250);
+  --ink:oklch(0.925 0.006 250);--ink2:oklch(0.715 0.011 250);--ink3:oklch(0.565 0.012 250);
+  --red:oklch(0.685 0.185 25);--redbg:oklch(0.275 0.06 25);--amber:oklch(0.775 0.135 78);
+  --blue:oklch(0.715 0.115 252);--green:oklch(0.7 0.105 155);
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--ink)}
+html,body{margin:0;padding:0;background:linear-gradient(to bottom,#000 0%,#000 50%,#020617 100%);color:var(--ink)}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased;text-wrap:pretty;-webkit-text-size-adjust:100%}
 a{color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
 a:hover{border-bottom-color:currentColor}
@@ -71,7 +62,7 @@ b{font-weight:700;color:var(--ink2)}
 #track{display:grid;grid-auto-flow:column;grid-auto-columns:352px;grid-template-rows:112px auto 292px;column-gap:26px;
   overflow-x:auto;overflow-y:hidden;padding:2px 14px 14px;scroll-snap-type:x proximity;overscroll-behavior-x:contain;
   -webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;scrollbar-width:thin;cursor:grab}
-#track.drag{cursor:grabbing;scroll-snap-type:none}
+#track.drag{cursor:grabbing;scroll-snap-type:none;user-select:none;-webkit-user-select:none}
 #track::-webkit-scrollbar{height:9px}
 #track::-webkit-scrollbar-thumb{background:var(--line2)}
 .col{display:grid;grid-template-rows:subgrid;grid-row:1/4;scroll-snap-align:start;scroll-margin-left:14px;min-width:0}
@@ -568,6 +559,7 @@ article[hidden]{display:none}
   track.addEventListener('pointerdown',function(e){
     if(e.pointerType==='touch'||e.target.closest('a,button,input,.pill'))return;
     down=true;sx=e.clientX;sl=track.scrollLeft;track.classList.add('drag');
+    e.preventDefault();
   });
   track.addEventListener('pointermove',function(e){
     if(!down)return;track.scrollLeft=sl-(e.clientX-sx);
