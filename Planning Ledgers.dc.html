@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="omelette-owns-print">
+<style>
+:root{
+  --bg:oklch(0.985 0.004 250);
+  --card:oklch(1 0 0);
+  --sunk:oklch(0.965 0.004 250);
+  --line:oklch(0.895 0.008 250);
+  --line2:oklch(0.82 0.01 250);
+  --ink:oklch(0.26 0.014 250);
+  --ink2:oklch(0.475 0.012 250);
+  --ink3:oklch(0.615 0.011 250);
+  --red:oklch(0.505 0.185 25);
+  --redbg:oklch(0.955 0.032 25);
+  --amber:oklch(0.545 0.135 68);
+  --blue:oklch(0.505 0.135 252);
+  --green:oklch(0.475 0.105 155);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:oklch(0.168 0.008 250);
+    --card:oklch(0.212 0.009 250);
+    --sunk:oklch(0.19 0.008 250);
+    --line:oklch(0.295 0.011 250);
+    --line2:oklch(0.38 0.014 250);
+    --ink:oklch(0.925 0.006 250);
+    --ink2:oklch(0.715 0.011 250);
+    --ink3:oklch(0.565 0.012 250);
+    --red:oklch(0.685 0.185 25);
+    --redbg:oklch(0.275 0.06 25);
+    --amber:oklch(0.775 0.135 78);
+    --blue:oklch(0.715 0.115 252);
+    --green:oklch(0.7 0.105 155);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+a{color:var(--blue);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:currentColor}
+#fbar label{cursor:pointer;border:1px solid var(--line2);background:var(--card);color:var(--ink2);padding:1px 9px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase}
+#fbar label:hover{border-color:var(--ink3);color:var(--ink)}
+#f-all:checked~#fbar label[for=f-all],#f-rel:checked~#fbar label[for=f-rel],#f-road:checked~#fbar label[for=f-road]{background:var(--ink);border-color:var(--ink);color:var(--card)}
+#f-all:focus-visible~#fbar label[for=f-all],#f-rel:focus-visible~#fbar label[for=f-rel],#f-road:focus-visible~#fbar label[for=f-road]{outline:2px solid var(--blue);outline-offset:1px}
+#panels>section{transition:opacity .16s ease}
+#f-rel:checked~#panels #p-road,#f-road:checked~#panels #p-rel{opacity:.5}
+@media print{#fbar{display:none}#panels>section{opacity:1!important}}
+@media print{
+  :root{--bg:#fff;--card:#fff;--sunk:#fff;--line:#c8c8c8;--line2:#999;--ink:#000;--ink2:#333;--ink3:#555;--red:#8a0f0f;--amber:#6b4a00;--blue:#123a8a;--green:#14502e}
+  html,body{background:#fff}
+  @page{margin:10mm}
+}
+</style>
+</helmet>
+
+<div style="padding:14px 16px 26px;max-width:1480px;margin:0 auto">
+
+  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px">
+    <div style="display:flex;align-items:baseline;gap:10px">
+      <span style="font-size:15px;font-weight:650;letter-spacing:-0.01em">Planning ledgers</span>
+      <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3)">helix-core · read-only</span>
+    </div>
+    <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">generated 2026-08-19 07:41:06Z</span>
+  </div>
+
+  <input type="radio" name="focus" id="f-all" checked style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
+  <input type="radio" name="focus" id="f-rel" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
+  <input type="radio" name="focus" id="f-road" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
+  <div id="fbar" style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
+    <span style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3)">focus</span>
+    <label for="f-all">both</label>
+    <label for="f-rel">releases</label>
+    <label for="f-road">roadmap</label>
+  </div>
+
+  <div style="display:grid;grid-template-columns:5px minmax(0,1fr);border:1px solid var(--red);background:var(--redbg);margin-bottom:10px;break-inside:avoid">
+    <div style="background:repeating-linear-gradient(135deg,var(--red) 0 4px,transparent 4px 8px);background-color:var(--red)"></div>
+    <div style="padding:9px 12px 10px">
+      <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--red)">⚠ stale — source file has unsynced edits</div>
+      <div style="color:var(--ink);margin-top:3px;max-width:96ch">roadmap.md was modified <b>2026-08-19 09:52Z</b>, 2h 11m after the last database sync. 3 rows differ. Everything below this line reflects the database, not the file you edited. Run <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;background:var(--card);border:1px solid var(--red);padding:0 4px">ledger sync --from-md</span> before trusting this page.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);background:var(--sunk);margin-bottom:16px;break-inside:avoid">
+    <div style="padding:6px 14px;border-right:1px solid var(--line);min-width:112px">
+      <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3)">db generation</div>
+      <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-variant-numeric:tabular-nums">412</div>
+    </div>
+    <div style="padding:6px 14px;border-right:1px solid var(--line);min-width:112px">
+      <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3)">receipts</div>
+      <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-variant-numeric:tabular-nums">1,284</div>
+    </div>
+    <div style="padding:6px 14px;border-right:1px solid var(--line);min-width:176px">
+      <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3)">last sync</div>
+      <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-variant-numeric:tabular-nums">2026-08-19 07:41Z <span style="color:var(--ink3)">· 2h 11m ago</span></div>
+    </div>
+    <div style="padding:6px 14px;border-right:1px solid var(--line);min-width:150px">
+      <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red)">row parity</div>
+      <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-variant-numeric:tabular-nums;color:var(--red);font-weight:700">✗ db 20 / md 23</div>
+    </div>
+    <div style="padding:6px 14px;min-width:132px">
+      <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3)">releases open</div>
+      <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;font-variant-numeric:tabular-nums">6 <span style="color:var(--ink3)">of 9</span> · <span style="color:var(--red);font-weight:700">1 overdue</span></div>
+    </div>
+  </div>
+
+  <div id="panels" style="display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,0.98fr);gap:22px;align-items:start">
+
+    <section id="p-rel" style="min-width:0">
+      <div style="display:flex;align-items:baseline;gap:8px;border-bottom:1px solid var(--line2);padding-bottom:4px;margin-bottom:8px">
+        <h2 style="margin:0;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase">Releases</h2>
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">9 · by target date</span>
+      </div>
+      <div style="display:grid;gap:6px">
+
+        <article style="border:1px solid var(--line);border-left:3px solid var(--line2);background:var(--card);padding:7px 10px 8px;opacity:0.58;break-inside:avoid" style-hover="opacity:1;border-color:var(--line2)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:15px;font-weight:650;letter-spacing:-0.01em">Keystone</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink2)">0.5.0</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line2);padding:0 5px">shipped</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:1px">shipped 2026-05-02 · 8 items · 0 open · <a href="https://github.com/helix/core/milestone/12">m/12</a></div>
+        </article>
+
+        <article style="border:1px solid var(--line);border-left:3px solid var(--line2);background:var(--card);padding:7px 10px 8px;opacity:0.58;break-inside:avoid" style-hover="opacity:1;border-color:var(--line2)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:15px;font-weight:650;letter-spacing:-0.01em">Lantern</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink2)">0.6.0</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line2);padding:0 5px">shipped</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:1px">shipped 2026-06-18 · 11 items · 0 open · <a href="https://github.com/helix/core/milestone/13">m/13</a></div>
+        </article>
+
+        <article style="border:1px solid var(--line);border-left:3px solid var(--line2);background:var(--card);padding:7px 10px 8px;opacity:0.58;break-inside:avoid" style-hover="opacity:1;border-color:var(--line2)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:15px;font-weight:650;letter-spacing:-0.01em">Tessellate</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink2)">0.6.3</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line2);padding:0 5px">shipped</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:1px">shipped 2026-07-30 · 4 items · 0 open · <a href="https://github.com/helix/core/milestone/14">m/14</a></div>
+        </article>
+
+        <article style="border:1px solid var(--red);border-left:3px solid var(--red);background:var(--card);padding:8px 10px 9px;break-inside:avoid;box-shadow:0 0 0 1px var(--red) inset" style-hover="background:var(--redbg)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:19px;font-weight:700;letter-spacing:-0.015em;color:var(--red)">Rampart</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--ink2)">0.7.0</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--card);background:var(--red);padding:1px 6px">4 days overdue</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:2px">active · target 2026-08-15 · 7 items · <span style="color:var(--red);font-weight:700">2 open</span> · <a href="https://github.com/helix/core/milestone/15">m/15</a></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.4;color:var(--ink2);max-width:82ch;border-top:1px dotted var(--line2);padding-top:4px">Exit: replication lag under 250ms at p99 for a 3-node cluster under sustained 5k writes/sec, with failover verified by the chaos suite on two consecutive nightly runs. Both remaining items are blocked on the storage-layer fsync rewrite (GH-71).</p>
+        </article>
+
+        <article style="border:1px solid var(--line2);border-left:3px solid var(--blue);background:var(--card);padding:8px 10px 9px;break-inside:avoid" style-hover="border-color:var(--blue)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:18px;font-weight:700;letter-spacing:-0.015em">Bulwark</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--ink2)">0.7.1</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--blue);border:1px solid var(--blue);padding:0 5px">active</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:2px">target 2026-09-26 · <b style="color:var(--ink)">in 38 days</b> · 3 items · 0 open · <a href="https://github.com/helix/core/milestone/16">m/16</a></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.4;color:var(--ink2);max-width:82ch;border-top:1px dotted var(--line2);padding-top:4px">Exit: every public API surface carries a deprecation policy note, and the migration guide from 0.6.x passes a clean-room run by someone who did not write it.</p>
+        </article>
+
+        <article style="border:1px solid var(--line);border-left:3px solid var(--line);background:var(--card);padding:8px 10px 9px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:17px;font-weight:650;letter-spacing:-0.015em">Causeway</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink2)">0.8.0</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink3);border:1px dashed var(--line2);padding:0 5px">draft</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:2px">target 2026-10-30 · in 72 days · 6 items · 6 open · <a href="https://github.com/helix/core/milestone/17">m/17</a></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.4;color:var(--ink2);max-width:82ch;border-top:1px dotted var(--line2);padding-top:4px">Exit: the ingest bridge accepts both wire formats behind a single endpoint, and the legacy shim can be removed without touching consumer code. Scope is deliberately loose until Rampart lands.</p>
+        </article>
+
+        <article style="border:1px solid var(--line);border-left:3px solid var(--line);background:var(--card);padding:8px 10px 9px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:17px;font-weight:650;letter-spacing:-0.015em">Drawbridge</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink2)">0.9.0</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink3);border:1px dashed var(--line2);padding:0 5px">draft</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:2px">target 2026-12-11 · in 114 days · 5 items · 5 open · <a href="https://github.com/helix/core/milestone/18">m/18</a></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.4;color:var(--ink2);max-width:82ch;border-top:1px dotted var(--line2);padding-top:4px">Exit: external plugins load from a signed bundle with no build step, and a third-party author can go from empty directory to running plugin using only published docs.</p>
+        </article>
+
+        <article style="border:1px solid var(--line);border-left:3px solid var(--line);background:var(--card);padding:8px 10px 9px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:17px;font-weight:650;letter-spacing:-0.015em">Portcullis</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink2)">1.0.0</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink3);border:1px dashed var(--line2);padding:0 5px">draft</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:2px">target 2027-02-26 · in 191 days · 9 items · 9 open · <a href="https://github.com/helix/core/milestone/19">m/19</a></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.4;color:var(--ink2);max-width:82ch;border-top:1px dotted var(--line2);padding-top:4px">Exit: semver commitment published; no breaking change ships without a two-release deprecation window. The API freeze review has to be signed off by all three maintainers, and the 1.x support horizon must be stated in writing.</p>
+        </article>
+
+        <article style="border:1px solid var(--line);border-left:3px solid var(--line);background:var(--card);padding:8px 10px 9px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:baseline;gap:7px;min-width:0">
+              <span style="font-size:17px;font-weight:650;letter-spacing:-0.015em">Barbican</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink2)">1.1.0</span>
+            </div>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:9px;letter-spacing:0.11em;text-transform:uppercase;color:var(--ink3);border:1px dashed var(--line2);padding:0 5px">draft</span>
+          </div>
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:2px">target 2027-05-14 · in 268 days · 2 items · 2 open · <a href="https://github.com/helix/core/milestone/20">m/20</a></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.4;color:var(--ink2);max-width:82ch;border-top:1px dotted var(--line2);padding-top:4px">Exit: not yet written. Placeholder milestone so post-1.0 work has somewhere to land.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="p-road" style="min-width:0">
+      <div style="display:flex;align-items:baseline;gap:8px;border-bottom:1px solid var(--line2);padding-bottom:4px;margin-bottom:8px">
+        <h2 style="margin:0;font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase">Roadmap</h2>
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">20 · rank order within section</span>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:7px;margin:2px 0 5px">
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber)">Ad-hoc detours</span>
+        <span style="flex:1;border-bottom:1px solid var(--line)"></span>
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2</span>
+      </div>
+      <div style="display:grid;gap:3px;margin-bottom:14px">
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line2);border-left:2px solid var(--amber);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--amber)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;text-align:center;color:var(--card);background:var(--ink);align-self:start;line-height:1.6">1</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--amber)" title="in progress">◑</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-88</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Hotfix: connection pool leaks a socket per cancelled request under TLS 1.3 renegotiation</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">in progress · cplx 2 · risk <b style="color:var(--red)">5</b> · eff 2 · <a href="https://github.com/helix/core/issues/88">issue</a> · <a href="https://docs.helix.dev/notes/gh-88">doc</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--amber);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">2</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink3)" title="queued">○</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-91</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Answer the security questionnaire from the platform team before their audit window closes</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">queued · <a href="https://github.com/helix/core/issues/91">issue</a></div>
+          </div>
+        </article>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:7px;margin:2px 0 5px">
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink)">Queue / parked intake</span>
+        <span style="flex:1;border-bottom:1px solid var(--line)"></span>
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">7</span>
+      </div>
+      <div style="display:grid;gap:3px;margin-bottom:14px">
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line2);border-left:2px solid var(--line2);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--blue)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;text-align:center;color:var(--card);background:var(--ink);align-self:start;line-height:1.6">1</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink3)" title="queued">○</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-75</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Rewrite the storage-layer fsync path so durability guarantees hold on ext4 without the journal barrier</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">queued · cplx <b style="color:var(--ink2)">5</b> · risk <b style="color:var(--red)">4</b> · eff <b style="color:var(--ink2)">5</b> · blocks Rampart · <a href="https://github.com/helix/core/issues/75">issue</a> · <a href="https://docs.helix.dev/rfc/0031-fsync">doc</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--line);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">2</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink3)" title="queued">○</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-79</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Chaos suite: automate the two-node partition scenario currently run by hand</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">queued · cplx 3 · risk 2 · eff 3 · <a href="https://github.com/helix/core/issues/79">issue</a> · <a href="https://docs.helix.dev/notes/chaos">doc</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--line);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">3</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink3)" title="queued">○</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-82</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Publish the 0.6.x → 0.7.x migration guide and have someone outside the team run it clean-room</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">queued · cplx 1 · risk 3 · eff 2 · <a href="https://github.com/helix/core/issues/82">issue</a> · <a href="https://docs.helix.dev/migrate/07">doc</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--line);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">4</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink3)" title="queued">○</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-84</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Deprecation policy note on every public API surface</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">queued · cplx 2 · risk 1 · eff 4 · <a href="https://github.com/helix/core/issues/84">issue</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--line);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">5</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink3)" title="queued">○</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-86</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Ingest bridge: accept both wire formats behind one endpoint</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">queued · cplx <b style="color:var(--ink2)">4</b> · risk 3 · eff <b style="color:var(--ink2)">4</b> · <a href="https://github.com/helix/core/issues/86">issue</a> · <a href="https://docs.helix.dev/rfc/0034-bridge">doc</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--line);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">6</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink3)" title="paused">‖</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-63</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Metrics exporter for the replication lag histogram</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">paused · waiting on GH-75 · cplx 2 · risk 1 · eff 2 · <a href="https://github.com/helix/core/issues/63">issue</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--line);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">7</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--ink3)" title="queued">○</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-90</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Intake: user report of nondeterministic ordering in the change feed — unreproduced, needs triage</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">queued · unsized · <a href="https://github.com/helix/core/issues/90">issue</a></div>
+          </div>
+        </article>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:7px;margin:2px 0 5px">
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink)">In progress</span>
+        <span style="flex:1;border-bottom:1px solid var(--line)"></span>
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">3</span>
+      </div>
+      <div style="display:grid;gap:3px;margin-bottom:14px">
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line2);border-left:2px solid var(--blue);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--blue)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;text-align:center;color:var(--card);background:var(--ink);align-self:start;line-height:1.6">1</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--blue)" title="in progress">◑</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-71</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Replication: cut p99 lag from 410ms to under 250ms at 5k writes/sec</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">in progress · 6 days · cplx <b style="color:var(--ink2)">4</b> · risk <b style="color:var(--red)">4</b> · eff <b style="color:var(--ink2)">4</b> · <a href="https://github.com/helix/core/issues/71">issue</a> · <a href="https://docs.helix.dev/rfc/0029-repl">doc</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--blue);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">2</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--blue)" title="in progress">◑</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-77</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Ledger CLI: make sync idempotent and report a diff instead of overwriting</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">in progress · 2 days · cplx 3 · risk 2 · eff 3 · <a href="https://github.com/helix/core/issues/77">issue</a> · <a href="https://docs.helix.dev/notes/ledger-sync">doc</a></div>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);border-left:2px solid var(--blue);background:var(--card);padding:5px 9px 6px;break-inside:avoid" style-hover="border-color:var(--line2)">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;text-align:center;color:var(--ink3);align-self:start;line-height:1.6">3</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--blue)" title="in progress">◑</span>
+              <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-80</span>
+              <span style="font-size:13px;font-weight:600;min-width:0">Docs site: switch to generated API reference</span>
+            </div>
+            <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);margin-top:1px">in progress · 11 days · cplx 2 · risk 1 · eff 3 · <a href="https://github.com/helix/core/issues/80">issue</a></div>
+          </div>
+        </article>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:7px;margin:2px 0 5px">
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Completed</span>
+        <span style="flex:1;border-bottom:1px solid var(--line)"></span>
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">8</span>
+      </div>
+      <div style="display:grid;gap:2px;margin-bottom:14px;opacity:0.62" style-hover="opacity:1">
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);background:var(--card);padding:4px 9px 5px;break-inside:avoid">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;text-align:center;color:var(--green);align-self:start" title="done">✓</div>
+          <div style="min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-70</span>
+            <span style="font-size:12px">Snapshot restore verifies checksums before replaying the WAL</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2026-08-14 · <a href="https://github.com/helix/core/issues/70">issue</a></span>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);background:var(--card);padding:4px 9px 5px;break-inside:avoid">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;text-align:center;color:var(--green);align-self:start" title="done">✓</div>
+          <div style="min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-68</span>
+            <span style="font-size:12px">Config loader rejects unknown keys instead of silently ignoring them</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2026-08-11 · <a href="https://github.com/helix/core/issues/68">issue</a></span>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);background:var(--card);padding:4px 9px 5px;break-inside:avoid">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;text-align:center;color:var(--green);align-self:start" title="done">✓</div>
+          <div style="min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-66</span>
+            <span style="font-size:12px">Receipts table: index on (entity, generation) — 40× faster ledger reads</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2026-08-07 · <a href="https://github.com/helix/core/issues/66">issue</a> · <a href="https://docs.helix.dev/notes/gh-66">doc</a></span>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);background:var(--card);padding:4px 9px 5px;break-inside:avoid">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;text-align:center;color:var(--green);align-self:start" title="done">✓</div>
+          <div style="min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-64</span>
+            <span style="font-size:12px">Drop the vendored yaml fork</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2026-08-03 · <a href="https://github.com/helix/core/issues/64">issue</a></span>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);background:var(--card);padding:4px 9px 5px;break-inside:avoid">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;text-align:center;color:var(--green);align-self:start" title="done">✓</div>
+          <div style="min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-61</span>
+            <span style="font-size:12px">Tessellate release notes and changelog automation</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2026-07-30 · <a href="https://github.com/helix/core/issues/61">issue</a></span>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);background:var(--card);padding:4px 9px 5px;break-inside:avoid">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;text-align:center;color:var(--green);align-self:start" title="done">✓</div>
+          <div style="min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-59</span>
+            <span style="font-size:12px">Nightly build matrix covers macOS arm64</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2026-07-24 · <a href="https://github.com/helix/core/issues/59">issue</a></span>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);background:var(--card);padding:4px 9px 5px;break-inside:avoid">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;text-align:center;color:var(--green);align-self:start" title="done">✓</div>
+          <div style="min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-55</span>
+            <span style="font-size:12px">Ledger schema v3 migration, with a reversible down path</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2026-07-19 · <a href="https://github.com/helix/core/issues/55">issue</a> · <a href="https://docs.helix.dev/rfc/0026-schema">doc</a></span>
+          </div>
+        </article>
+        <article style="display:grid;grid-template-columns:19px minmax(0,1fr);gap:0 8px;border:1px solid var(--line);background:var(--card);padding:4px 9px 5px;break-inside:avoid">
+          <div style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;text-align:center;color:var(--green);align-self:start" title="done">✓</div>
+          <div style="min-width:0;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--ink3)">GH-52</span>
+            <span style="font-size:12px">Retire the /v0 compatibility endpoints</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">2026-07-15 · <a href="https://github.com/helix/core/issues/52">issue</a></span>
+          </div>
+        </article>
+      </div>
+
+      <div style="display:flex;align-items:baseline;gap:7px;margin:2px 0 5px">
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3)">Deferred · vision</span>
+        <span style="flex:1;border-bottom:1px solid var(--line)"></span>
+        <span style="font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3)">0</span>
+      </div>
+      <div style="border:1px dashed var(--line);background:transparent;padding:6px 9px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.06em;color:var(--ink3);break-inside:avoid">empty</div>
+
+    </section>
+  </div>
+
+  <div style="margin-top:18px;border-top:1px solid var(--line);padding-top:6px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;color:var(--ink3);display:flex;gap:14px;flex-wrap:wrap">
+    <span>ledger.db · schema v3 · gen 412</span>
+    <span>○ queued &nbsp; ◑ in progress &nbsp; ‖ paused &nbsp; ✓ done</span>
+    <span>cplx / risk / eff scored 1–5</span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
