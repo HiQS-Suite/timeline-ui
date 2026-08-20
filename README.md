@@ -1,5 +1,7 @@
 # timeline-ui
 
+<img width="4446" height="1930" alt="CleanShot 2026-08-19 at 21 13 01@2x" src="https://github.com/user-attachments/assets/00678f83-68a8-4e0d-a22f-41022602750b" />
+
 **helix-core · planning ledgers** — a single-file, dependency-free HTML timeline for browsing releases, issues, and labels along a horizontally scrollable rail.
 
 > **Requires a local web server.** `ledger.html` loads its data via `fetch('./data.json')`, which browsers block on a plain `file://` page. Double-clicking the file will not work — see Usage below. If you need something that opens directly with no server, use [`ledger-static-preview.html`](ledger-static-preview.html) instead.
