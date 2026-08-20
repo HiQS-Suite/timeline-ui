@@ -185,40 +185,23 @@ article[hidden]{display:none}
 
   <div class="top">
     <div style="display:flex;align-items:baseline;gap:10px">
-      <span class="ttl">Planning ledgers</span>
-      <span class="mono" style="font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3)">helix-core · read-only</span>
+      <span class="ttl" id="pg-title">Planning ledgers</span>
+      <span class="mono" id="pg-subtitle" style="font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink3)"></span>
     </div>
-    <span class="mono" style="font-size:10px;color:var(--ink3)">generated 2026-08-19 07:41:06Z</span>
+    <span class="mono" id="pg-generated" style="font-size:10px;color:var(--ink3)"></span>
   </div>
 
-  <div class="banner">
+  <div class="banner" id="banner" hidden>
     <div class="hz"></div>
     <div style="padding:8px 12px 9px">
       <h3>⚠ stale — source file has unsynced edits</h3>
-      <p>roadmap.md was modified <b style="color:var(--ink)">2026-08-19 09:52Z</b>, 2h 11m after the last database sync. 3 rows differ. Everything below this line reflects the database, not the file you edited. Run <code>ledger sync --from-md</code> before trusting this page.</p>
+      <p id="banner-body"></p>
     </div>
   </div>
 
-  <div class="bar">
-    <div><div class="tiny">db generation</div><div class="v">412</div></div>
-    <div><div class="tiny">receipts</div><div class="v">1,284</div></div>
-    <div><div class="tiny">last sync</div><div class="v">2026-08-19 07:41Z <span style="color:var(--ink3)">· 2h 11m ago</span></div></div>
-    <div><div class="tiny" style="color:var(--red)">row parity</div><div class="v r">✗ db 20 / md 23</div></div>
-    <div><div class="tiny">releases open</div><div class="v">6 <span style="color:var(--ink3)">of 9</span> · <span class="r">1 overdue</span></div></div>
-  </div>
+  <div class="bar" id="bar"></div>
 
-  <div class="strip">
-    <div>
-      <div class="tiny">just finished</div>
-      <div class="h"><span class="mk m-done">✓</span><span class="iid">GH-70</span><span class="t">Snapshot restore verifies checksums before replaying the WAL</span></div>
-      <div class="meta">closed 2026-08-14 · 5 days ago · merged into Rampart 0.7.0 · <a href="https://github.com/helix/core/issues/70">issue</a></div>
-    </div>
-    <div>
-      <div class="tiny">what's next</div>
-      <div class="h"><span class="mk">○</span><span class="iid">GH-75</span><span class="t">Rewrite the storage-layer fsync path</span></div>
-      <div class="meta">pri <b class="r">1</b> · sev <b class="r">3</b> · app 12 · calc <b class="r">4</b> <span class="ovr" data-up>▸ ovr 2</span> · marathon <a href="https://github.com/helix/core/issues/402">GH-402</a> p1 · <b class="r">blocks Rampart (overdue)</b> · <a href="https://github.com/helix/core/issues/75">issue</a></div>
-    </div>
-  </div>
+  <div class="strip" id="strip"></div>
 
   <div id="fbar">
     <span class="tiny">search &amp; filter</span>
@@ -241,246 +224,11 @@ article[hidden]{display:none}
   <div class="scrim" id="s-top"></div>
   <div class="scrim" id="s-mid"></div>
   <div class="scrim" id="s-bot"></div>
-  <div id="track" data-focus="all">
-      <div class="col" data-v="0.5.0" data-name="keystone" id="c-0-5-0">
-        <div class="lane lane-t">
-        <div class="stub">no detours</div>
-        </div>
-        <div class="tr">
-          <article class="node shipped" tabindex="0">
-            <div class="nh"><span class="cn">Keystone</span><span class="ver">0.5.0</span><span class="badge shipped">shipped</span></div>
-            <div class="meta">shipped 2026-05-02 · 8 items · <span>0 open</span> · <a href="https://github.com/helix/core/milestone/12">m/12</a></div>
-            <p class="exit">Exit: first externally consumable build; API surface documented and a working quickstart.</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <article class="lc" data-sec="done">
-          <div class="lh"><span class="mk m-done">✓</span><span class="iid">GH-52</span><span class="lt">Retire the /v0 compatibility endpoints</span></div>
-          <div class="meta"><span class="sec">completed</span> · closed 2026-07-15 · pri <b>12</b> · sev 20 · app 30 · calc 18 · <a href="https://github.com/helix/core/issues/52">issue</a></div>
-          <div class="pills"><span class="pill">api</span><span class="pill" data-hot>breaking</span></div>
-        </article>
-        </div>
-      </div>
-      <div class="col" data-v="0.6.0" data-name="lantern" id="c-0-6-0">
-        <div class="lane lane-t">
-        <div class="stub">no detours</div>
-        </div>
-        <div class="tr">
-          <article class="node shipped" tabindex="0">
-            <div class="nh"><span class="cn">Lantern</span><span class="ver">0.6.0</span><span class="badge shipped">shipped</span></div>
-            <div class="meta">shipped 2026-06-18 · 11 items · <span>0 open</span> · <a href="https://github.com/helix/core/milestone/13">m/13</a></div>
-            <p class="exit">Exit: observability baseline — structured logs, metrics endpoint, and a runbook for the three known failure modes.</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <article class="lc" data-sec="done">
-          <div class="lh"><span class="mk m-done">✓</span><span class="iid">GH-55</span><span class="lt">Ledger schema v3 migration, with a reversible down path</span></div>
-          <div class="meta"><span class="sec">completed</span> · closed 2026-07-19 · pri <b>8</b> · sev <b>15</b> · app 22 · calc <b>13</b> · <a href="https://github.com/helix/core/issues/55">issue</a> · <a href="https://docs.helix.dev/rfc/0026-schema">doc</a></div>
-          <div class="pills"><span class="pill">db</span><span class="pill">migration</span></div>
-        </article>
-        <article class="lc" data-sec="done">
-          <div class="lh"><span class="mk m-done">✓</span><span class="iid">GH-59</span><span class="lt">Nightly build matrix covers macOS arm64</span></div>
-          <div class="meta"><span class="sec">completed</span> · closed 2026-07-24 · pri 25 · sev 34 · app 28 · calc 28 · <a href="https://github.com/helix/core/issues/59">issue</a></div>
-          <div class="pills"><span class="pill">ci</span></div>
-        </article>
-        </div>
-      </div>
-      <div class="col" data-v="0.6.3" data-name="tessellate" id="c-0-6-3">
-        <div class="lane lane-t">
-        <div class="stub">no detours</div>
-        </div>
-        <div class="tr">
-          <article class="node shipped" tabindex="0">
-            <div class="nh"><span class="cn">Tessellate</span><span class="ver">0.6.3</span><span class="badge shipped">shipped</span></div>
-            <div class="meta">shipped 2026-07-30 · 4 items · <span>0 open</span> · <a href="https://github.com/helix/core/milestone/14">m/14</a></div>
-            <p class="exit">Exit: changelog and release notes generated from the ledger, no hand editing.</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <article class="lc" data-sec="done">
-          <div class="lh"><span class="mk m-done">✓</span><span class="iid">GH-61</span><span class="lt">Release notes and changelog automation</span></div>
-          <div class="meta"><span class="sec">completed</span> · closed 2026-07-30 · pri 30 · sev 45 · app 24 · calc 33 · <a href="https://github.com/helix/core/issues/61">issue</a></div>
-          <div class="pills"><span class="pill">release</span><span class="pill">automation</span></div>
-        </article>
-        <article class="lc" data-sec="done">
-          <div class="lh"><span class="mk m-done">✓</span><span class="iid">GH-64</span><span class="lt">Drop the vendored yaml fork</span></div>
-          <div class="meta"><span class="sec">completed</span> · closed 2026-08-03 · pri 41 · sev 58 · app 47 · calc 47 · <a href="https://github.com/helix/core/issues/64">issue</a></div>
-          <div class="pills"><span class="pill">deps</span></div>
-        </article>
-        </div>
-      </div>
-      <div class="col" data-v="0.7.0" data-name="rampart" id="c-0-7-0">
-        <div class="lane lane-t">
-        <article class="lc lead" data-sec="adhoc">
-          <div class="lh"><span class="mk m-wip">◑</span><span class="iid">GH-88</span><span class="lt">Hotfix: connection pool leaks a socket per cancelled request under TLS 1.3 renegotiation</span></div>
-          <div class="meta"><span class="sec">ad-hoc detour</span> · pri <b class="r">2</b> · sev <b class="r">1</b> · app 44 · calc <b>10</b> <span class="ovr" data-up>▸ ovr 1</span> · <a href="https://github.com/helix/core/issues/88">issue</a> · <a href="https://docs.helix.dev/notes/gh-88">doc</a></div>
-          <div class="pills"><span class="pill" data-hot>bug</span><span class="pill" data-hot>security</span><span class="pill">tls</span></div>
-        </article>
-        </div>
-        <div class="tr">
-          <article class="node active od" tabindex="0">
-            <div class="nh"><span class="cn">Rampart</span><span class="ver">0.7.0</span><span class="badge od">4 days overdue</span></div>
-            <div class="meta">target 2026-08-15 · <b>4 days overdue</b> · 7 items · <span class="r">2 open</span> · <a href="https://github.com/helix/core/milestone/15">m/15</a></div>
-            <p class="exit">Exit: replication lag under 250ms at p99 for a 3-node cluster under sustained 5k writes/sec, with failover verified by the chaos suite on two consecutive nightly runs. Both remaining items are blocked on the storage-layer fsync rewrite (GH-75).</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <div class="mar" data-state="run" data-mar="402">
-          <div class="mh"><span class="mtag">marathon</span><span class="iid"><a href="https://github.com/helix/core/issues/402">GH-402</a></span><span class="mt">fsync durability chain</span><span class="mmeta">2 phases · sequential · p1→p2</span></div>
-          <article class="lc lead" data-sec="queue">
-            <div class="lh"><span class="mk m-queued">○</span><span class="ph">p1</span><span class="iid">GH-75</span><span class="lt">Rewrite the storage-layer fsync path so durability guarantees hold on ext4 without the journal barrier</span></div>
-            <div class="meta"><span class="sec">queue</span> · pri <b class="r">1</b> · sev <b class="r">3</b> · app 12 · calc <b class="r">4</b> <span class="ovr" data-up>▸ ovr 2</span> · blocks this release · <a href="https://github.com/helix/core/issues/75">issue</a> · <a href="https://docs.helix.dev/rfc/0031-fsync">doc</a></div>
-            <div class="pills"><span class="pill">storage</span><span class="pill" data-hot>breaking-risk</span><span class="pill">rfc</span></div>
-          </article>
-          <article class="lc" data-sec="queue">
-            <div class="lh"><span class="mk m-paused">‖</span><span class="ph">p2</span><span class="iid">GH-63</span><span class="lt">Metrics exporter for the replication lag histogram</span></div>
-            <div class="meta"><span class="sec">queue</span> · paused, waiting on GH-75 · pri 22 · sev 31 · app 38 · calc 28 · <a href="https://github.com/helix/core/issues/63">issue</a></div>
-            <div class="pills"><span class="pill">observability</span><span class="pill" data-hot>blocked</span></div>
-          </article>
-        </div>
-        <article class="lc lead" data-sec="wip">
-          <div class="lh"><span class="mk m-wip">◑</span><span class="iid">GH-71</span><span class="lt">Replication: cut p99 lag from 410ms to under 250ms at 5k writes/sec</span></div>
-          <div class="meta"><span class="sec">in progress</span> · 6 days · pri <b class="r">4</b> · sev <b>6</b> · app 9 · calc <b>6</b> · <a href="https://github.com/helix/core/issues/71">issue</a> · <a href="https://docs.helix.dev/rfc/0029-repl">doc</a></div>
-          <div class="pills"><span class="pill">perf</span><span class="pill">replication</span></div>
-        </article>
-        <div class="mar" data-state="done" data-mar="388">
-          <div class="mh"><span class="mtag">marathon</span><span class="iid"><a href="https://github.com/helix/core/issues/388">GH-388</a></span><span class="mt">snapshot + config hardening</span><span class="mmeta">3 phases · p1→p3 · closed 2026-08-14</span></div>
-          <article class="lc" data-sec="done">
-            <div class="lh"><span class="mk m-done">✓</span><span class="ph">p1</span><span class="iid">GH-66</span><span class="lt">Receipts table: index on (entity, generation) — 40× faster ledger reads</span></div>
-            <div class="meta"><span class="sec">completed</span> · closed 2026-08-07 · pri <b>11</b> · sev 17 · app 8 · calc <b>12</b> · <a href="https://github.com/helix/core/issues/66">issue</a> · <a href="https://docs.helix.dev/notes/gh-66">doc</a></div>
-            <div class="pills"><span class="pill">perf</span><span class="pill">db</span></div>
-          </article>
-          <article class="lc" data-sec="done">
-            <div class="lh"><span class="mk m-done">✓</span><span class="ph">p2</span><span class="iid">GH-68</span><span class="lt">Config loader rejects unknown keys instead of silently ignoring them</span></div>
-            <div class="meta"><span class="sec">completed</span> · closed 2026-08-11 · pri 19 · sev 26 · app 35 · calc 24 · <a href="https://github.com/helix/core/issues/68">issue</a></div>
-            <div class="pills"><span class="pill">config</span></div>
-          </article>
-          <article class="lc" data-sec="done">
-            <div class="lh"><span class="mk m-done">✓</span><span class="ph">p3</span><span class="iid">GH-70</span><span class="lt">Snapshot restore verifies checksums before replaying the WAL</span></div>
-            <div class="meta"><span class="sec">completed</span> · closed 2026-08-14 · pri <b class="r">5</b> · sev <b>9</b> · app 16 · calc <b>8</b> · <a href="https://github.com/helix/core/issues/70">issue</a></div>
-            <div class="pills"><span class="pill">storage</span><span class="pill">reliability</span></div>
-          </article>
-        </div>
-        </div>
-      </div>
-      <div class="col" data-v="0.7.1" data-name="bulwark" id="c-0-7-1">
-        <div class="lane lane-t">
-        <article class="lc" data-sec="adhoc">
-          <div class="lh"><span class="mk m-queued">○</span><span class="iid">GH-91</span><span class="lt">Answer the security questionnaire from the platform team before their audit window closes</span></div>
-          <div class="meta"><span class="sec">ad-hoc detour</span> · pri <b>7</b> · sev <b>12</b> · app 61 · calc 19 <span class="ovr" data-up>▸ ovr 6</span> · <a href="https://github.com/helix/core/issues/91">issue</a></div>
-          <div class="pills"><span class="pill">process</span><span class="pill" data-hot>security</span></div>
-        </article>
-        </div>
-        <div class="tr">
-          <article class="node active now" tabindex="0">
-            <div class="nh"><span class="cn">Bulwark</span><span class="ver">0.7.1</span><span class="badge active">active</span></div>
-            <div class="meta">target 2026-09-26 · <b>in 38 days</b> · 3 items · <span>0 open</span> · <a href="https://github.com/helix/core/milestone/16">m/16</a></div>
-            <p class="exit">Exit: every public API surface carries a deprecation policy note, and the migration guide from 0.6.x passes a clean-room run by someone who did not write it.</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <div class="mar" data-state="run" data-mar="407">
-          <div class="mh"><span class="mtag">marathon</span><span class="iid"><a href="https://github.com/helix/core/issues/407">GH-407</a></span><span class="mt">0.7.x API &amp; docs</span><span class="mmeta">2 phases · sequential · p1→p2</span></div>
-          <article class="lc" data-sec="queue">
-            <div class="lh"><span class="mk m-queued">○</span><span class="ph">p1</span><span class="iid">GH-82</span><span class="lt">Publish the 0.6.x → 0.7.x migration guide and have someone outside the team run it clean-room</span></div>
-            <div class="meta"><span class="sec">queue</span> · pri 16 · sev 24 · app 11 · calc 17 · <a href="https://github.com/helix/core/issues/82">issue</a> · <a href="https://docs.helix.dev/migrate/07">doc</a></div>
-            <div class="pills"><span class="pill">docs</span><span class="pill">release</span></div>
-          </article>
-          <article class="lc" data-sec="queue">
-            <div class="lh"><span class="mk m-queued">○</span><span class="ph">p2</span><span class="iid">GH-84</span><span class="lt">Deprecation policy note on every public API surface</span></div>
-            <div class="meta"><span class="sec">queue</span> · pri 27 · sev 40 · app 33 · calc 32 · <a href="https://github.com/helix/core/issues/84">issue</a></div>
-            <div class="pills"><span class="pill">api</span><span class="pill">docs</span></div>
-          </article>
-        </div>
-        <article class="lc" data-sec="wip">
-          <div class="lh"><span class="mk m-wip">◑</span><span class="iid">GH-77</span><span class="lt">Ledger CLI: make sync idempotent and report a diff instead of overwriting</span></div>
-          <div class="meta"><span class="sec">in progress</span> · 2 days · pri <b>9</b> · sev 18 · app 14 · calc <b>13</b> · <a href="https://github.com/helix/core/issues/77">issue</a> · <a href="https://docs.helix.dev/notes/ledger-sync">doc</a></div>
-          <div class="pills"><span class="pill">cli</span><span class="pill">tooling</span></div>
-        </article>
-        </div>
-      </div>
-      <div class="col" data-v="0.8.0" data-name="causeway" id="c-0-8-0">
-        <div class="lane lane-t">
-        <div class="stub">no detours</div>
-        </div>
-        <div class="tr">
-          <article class="node draft" tabindex="0">
-            <div class="nh"><span class="cn">Causeway</span><span class="ver">0.8.0</span><span class="badge draft">draft</span></div>
-            <div class="meta">target 2026-10-30 · <b>in 72 days</b> · 6 items · <span>6 open</span> · <a href="https://github.com/helix/core/milestone/17">m/17</a></div>
-            <p class="exit">Exit: the ingest bridge accepts both wire formats behind a single endpoint, and the legacy shim can be removed without touching consumer code. Scope is deliberately loose until Rampart lands.</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <article class="lc" data-sec="queue">
-          <div class="lh"><span class="mk m-queued">○</span><span class="iid">GH-79</span><span class="lt">Chaos suite: automate the two-node partition scenario currently run by hand</span></div>
-          <div class="meta"><span class="sec">queue</span> · pri <b>14</b> · sev 21 · app 26 · calc 19 · <a href="https://github.com/helix/core/issues/79">issue</a> · <a href="https://docs.helix.dev/notes/chaos">doc</a></div>
-          <div class="pills"><span class="pill">testing</span><span class="pill">infra</span></div>
-        </article>
-        <article class="lc" data-sec="queue">
-          <div class="lh"><span class="mk m-queued">○</span><span class="iid">GH-86</span><span class="lt">Ingest bridge: accept both wire formats behind one endpoint</span></div>
-          <div class="meta"><span class="sec">queue</span> · pri 31 · sev 29 · app 20 · calc 28 · <a href="https://github.com/helix/core/issues/86">issue</a> · <a href="https://docs.helix.dev/rfc/0034-bridge">doc</a></div>
-          <div class="pills"><span class="pill">ingest</span><span class="pill">rfc</span></div>
-        </article>
-        </div>
-      </div>
-      <div class="col" data-v="0.9.0" data-name="drawbridge" id="c-0-9-0">
-        <div class="lane lane-t">
-        <div class="stub">no detours</div>
-        </div>
-        <div class="tr">
-          <article class="node draft" tabindex="0">
-            <div class="nh"><span class="cn">Drawbridge</span><span class="ver">0.9.0</span><span class="badge draft">draft</span></div>
-            <div class="meta">target 2026-12-11 · <b>in 114 days</b> · 5 items · <span>5 open</span> · <a href="https://github.com/helix/core/milestone/18">m/18</a></div>
-            <p class="exit">Exit: external plugins load from a signed bundle with no build step, and a third-party author can go from empty directory to running plugin using only published docs.</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <article class="lc" data-sec="wip">
-          <div class="lh"><span class="mk m-wip">◑</span><span class="iid">GH-80</span><span class="lt">Docs site: switch to generated API reference</span></div>
-          <div class="meta"><span class="sec">in progress</span> · 11 days · pri 35 · sev 52 · app 19 · calc 37 · <a href="https://github.com/helix/core/issues/80">issue</a></div>
-          <div class="pills"><span class="pill">docs</span><span class="pill">infra</span></div>
-        </article>
-        </div>
-      </div>
-      <div class="col" data-v="1.0.0" data-name="portcullis" id="c-1-0-0">
-        <div class="lane lane-t">
-        <div class="stub">no detours</div>
-        </div>
-        <div class="tr">
-          <article class="node draft" tabindex="0">
-            <div class="nh"><span class="cn">Portcullis</span><span class="ver">1.0.0</span><span class="badge draft">draft</span></div>
-            <div class="meta">target 2027-02-26 · <b>in 191 days</b> · 9 items · <span>9 open</span> · <a href="https://github.com/helix/core/milestone/19">m/19</a></div>
-            <p class="exit">Exit: semver commitment published; no breaking change ships without a two-release deprecation window. The API freeze review has to be signed off by all three maintainers.</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <article class="lc" data-sec="deferred">
-          <div class="lh"><span class="mk m-queued">○</span><span class="iid">GH-90</span><span class="lt">Intake: user report of nondeterministic ordering in the change feed — unreproduced, needs triage</span></div>
-          <div class="meta"><span class="sec">deferred · vision</span> · pri 68 · sev 44 · app 77 · calc 63 <span class="ovr">▸ ovr 88</span> · <a href="https://github.com/helix/core/issues/90">issue</a></div>
-          <div class="pills"><span class="pill">triage</span><span class="pill" data-hot>needs-repro</span></div>
-        </article>
-        </div>
-      </div>
-      <div class="col" data-v="1.1.0" data-name="barbican" id="c-1-1-0">
-        <div class="lane lane-t">
-        <div class="stub">no detours</div>
-        </div>
-        <div class="tr">
-          <article class="node draft" tabindex="0">
-            <div class="nh"><span class="cn">Barbican</span><span class="ver">1.1.0</span><span class="badge draft">draft</span></div>
-            <div class="meta">target 2027-05-14 · <b>in 268 days</b> · 2 items · <span>2 open</span> · <a href="https://github.com/helix/core/milestone/20">m/20</a></div>
-            <p class="exit">Exit: not yet written. Placeholder milestone so post-1.0 work has somewhere to land.</p>
-          </article>
-        </div>
-        <div class="lane lane-b">
-        <div class="stub">no roadmap items merged into this release</div>
-        </div>
-      </div>
-  </div>
+  <div id="track" data-focus="all"></div>
 </div>
 
 <div class="foot">
-  <span>ledger.db · schema v3 · gen 412</span>
+  <span>ledger.db · schema v3 · gen <span id="foot-gen"></span></span>
   <span>← older &nbsp; newer → &nbsp;·&nbsp; swipe or drag the trunk</span>
   <span>ad-hoc merges down · roadmap merges up · ⟦marathon⟧ = gated phase chain, runs in order</span>
   <span>○ queued &nbsp; ◑ in progress &nbsp; ‖ paused &nbsp; ✓ done</span>
@@ -488,7 +236,143 @@ article[hidden]{display:none}
 </div>
 
 <script>
+/* ---- data loading + rendering ---- */
 (function(){
+  function esc(s){
+    return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});
+  }
+  var MARK_SYMBOL={wip:'◑',done:'✓',paused:'‖',queued:'○'};
+  var MARK_CLASS={wip:'m-wip',done:'m-done',paused:'m-paused',queued:'m-queued'};
+
+  function metricPart(key,val,flag){
+    var s=String(val);
+    if(flag==='hot') s='<b class="r">'+s+'</b>';
+    else if(flag==='bold') s='<b>'+s+'</b>';
+    return key+' '+s;
+  }
+
+  function cardHTML(c){
+    var flags=c.metricFlags||{},parts=[];
+    ['pri','sev','app','calc'].forEach(function(k){
+      if(c.metrics&&c.metrics[k]!=null) parts.push(metricPart(k,c.metrics[k],flags[k]));
+    });
+    var overrideHTML=c.override
+      ?(' <span class="ovr"'+(c.override.hot?' data-up':'')+'>▸ ovr '+c.override.value+'</span>')
+      :'';
+    var blocksHTML=c.blocks
+      ?(' · '+(c.blocks.hot?'<b class="r">'+esc(c.blocks.text)+'</b>':esc(c.blocks.text)))
+      :'';
+    var linksHTML='';
+    if(c.links){
+      if(c.links.issue) linksHTML+=' · <a href="'+c.links.issue+'">issue</a>';
+      if(c.links.doc) linksHTML+=' · <a href="'+c.links.doc+'">doc</a>';
+    }
+    var pillsHTML=(c.pills&&c.pills.length)
+      ?('<div class="pills">'+c.pills.map(function(p){
+          return '<span class="pill"'+(p.hot?' data-hot':'')+'>'+esc(p.label)+'</span>';
+        }).join('')+'</div>')
+      :'';
+    var phaseHTML=c.phase?('<span class="ph">'+esc(c.phase)+'</span>'):'';
+    var noteHTML=c.note?(' · '+esc(c.note)):'';
+    return '<article class="lc'+(c.lead?' lead':'')+'" data-sec="'+esc(c.section)+'">'+
+      '<div class="lh"><span class="mk '+(MARK_CLASS[c.marker]||'')+'">'+(MARK_SYMBOL[c.marker]||'○')+'</span>'+
+        phaseHTML+'<span class="iid">'+esc(c.id)+'</span><span class="lt">'+esc(c.title)+'</span></div>'+
+      '<div class="meta"><span class="sec">'+esc(c.sectionLabel)+'</span>'+noteHTML+
+        (parts.length?' · '+parts.join(' · '):'')+overrideHTML+blocksHTML+linksHTML+'</div>'+
+      pillsHTML+
+      '</article>';
+  }
+
+  function marathonHTML(m){
+    return '<div class="mar" data-state="'+esc(m.state)+'" data-mar="'+esc(String(m.id).replace('GH-',''))+'">'+
+      '<div class="mh"><span class="mtag">marathon</span><span class="iid"><a href="'+m.url+'">'+esc(m.id)+'</a></span>'+
+        '<span class="mt">'+esc(m.title)+'</span><span class="mmeta">'+esc(m.meta)+'</span></div>'+
+      m.cards.map(cardHTML).join('')+
+      '</div>';
+  }
+
+  function nodeHTML(rel){
+    var extraCls=[];
+    if(rel.flags&&rel.flags.now) extraCls.push('now');
+    if(rel.flags&&rel.flags.overdue) extraCls.push('od');
+    var extraText=rel.extra?(' · <b>'+esc(rel.extra)+'</b>'):'';
+    var openHTML=(rel.itemsOpen>0?'<span class="r">':'<span>')+rel.itemsOpen+' open</span>';
+    return '<article class="node '+rel.status+(extraCls.length?' '+extraCls.join(' '):'')+'" tabindex="0">'+
+      '<div class="nh"><span class="cn">'+esc(rel.name)+'</span><span class="ver">'+esc(rel.version)+'</span>'+
+        '<span class="badge '+esc(rel.badge.type)+'">'+esc(rel.badge.label)+'</span></div>'+
+      '<div class="meta">'+esc(rel.dateLabel)+' '+esc(rel.date)+extraText+' · '+rel.itemsTotal+' items · '+openHTML+
+        ' · <a href="'+rel.milestoneUrl+'">'+esc(rel.milestoneRef)+'</a></div>'+
+      '<p class="exit">'+esc(rel.exit)+'</p>'+
+      '</article>';
+  }
+
+  function columnHTML(rel){
+    var detours=(rel.detours&&rel.detours.length)
+      ? rel.detours.map(cardHTML).join('')
+      : '<div class="stub">no detours</div>';
+    var roadmap=(rel.roadmap&&rel.roadmap.length)
+      ? rel.roadmap.map(function(item){return item.type==='marathon'?marathonHTML(item):cardHTML(item);}).join('')
+      : '<div class="stub">no roadmap items merged into this release</div>';
+    return '<div class="col" data-v="'+esc(rel.version)+'" data-name="'+esc(rel.slug)+'" id="'+esc(rel.id)+'">'+
+      '<div class="lane lane-t">'+detours+'</div>'+
+      '<div class="tr">'+nodeHTML(rel)+'</div>'+
+      '<div class="lane lane-b">'+roadmap+'</div>'+
+      '</div>';
+  }
+
+  function renderHeader(data){
+    document.getElementById('pg-title').textContent=data.meta.title;
+    document.getElementById('pg-subtitle').textContent=data.meta.subtitle;
+    document.getElementById('pg-generated').textContent='generated '+data.meta.generatedAtDisplay;
+
+    if(data.sync&&data.sync.stale){
+      document.getElementById('banner').hidden=false;
+      document.getElementById('banner-body').innerHTML=
+        esc(data.sync.sourceFile)+' was modified <b style="color:var(--ink)">'+esc(data.sync.sourceModifiedDisplay)+'</b>, '+
+        esc(data.sync.lagDisplay)+' after the last database sync. '+data.sync.rowsDiffer+' rows differ. '+
+        'Everything below this line reflects the database, not the file you edited. Run <code>'+esc(data.sync.fixCommand)+'</code> before trusting this page.';
+    }
+
+    var t=data.telemetry;
+    document.getElementById('bar').innerHTML=
+      '<div><div class="tiny">db generation</div><div class="v">'+t.dbGeneration+'</div></div>'+
+      '<div><div class="tiny">receipts</div><div class="v">'+t.receipts.toLocaleString()+'</div></div>'+
+      '<div><div class="tiny">last sync</div><div class="v">'+esc(t.lastSyncDisplay)+' <span style="color:var(--ink3)">· '+esc(t.lastSyncAgoDisplay)+'</span></div></div>'+
+      '<div><div class="tiny" style="color:var(--red)">row parity</div><div class="v r">✗ db '+t.rowParity.db+' / md '+t.rowParity.md+'</div></div>'+
+      '<div><div class="tiny">releases open</div><div class="v">'+t.releasesOpen+' <span style="color:var(--ink3)">of '+t.releasesTotal+'</span> · <span class="r">'+t.releasesOverdue+' overdue</span></div></div>';
+    document.getElementById('foot-gen').textContent=t.dbGeneration;
+
+    var jf=data.justFinished,wn=data.whatsNext;
+    var wnFlags=wn.metricFlags||{},wnParts=[];
+    ['pri','sev','app','calc'].forEach(function(k){
+      if(wn.metrics&&wn.metrics[k]!=null) wnParts.push(metricPart(k,wn.metrics[k],wnFlags[k]));
+    });
+    var wnOverride=wn.override?(' <span class="ovr"'+(wn.override.hot?' data-up':'')+'>▸ ovr '+wn.override.value+'</span>'):'';
+    var wnMarathon=wn.marathon?(' · marathon <a href="'+wn.marathon.url+'">'+esc(wn.marathon.id)+'</a> '+esc(wn.marathon.phase)):'';
+    var wnBlocks=wn.blocks?(' · '+(wn.blocks.hot?'<b class="r">'+esc(wn.blocks.text)+'</b>':esc(wn.blocks.text))):'';
+    document.getElementById('strip').innerHTML=
+      '<div><div class="tiny">just finished</div>'+
+        '<div class="h"><span class="mk m-done">✓</span><span class="iid">'+esc(jf.issue)+'</span><span class="t">'+esc(jf.title)+'</span></div>'+
+        '<div class="meta">closed '+esc(jf.closedDateDisplay)+' · '+esc(jf.closedAgoDisplay)+' · merged into '+esc(jf.mergedInto)+' · <a href="'+jf.issueUrl+'">issue</a></div>'+
+      '</div>'+
+      '<div><div class="tiny">what\'s next</div>'+
+        '<div class="h"><span class="mk">○</span><span class="iid">'+esc(wn.issue)+'</span><span class="t">'+esc(wn.title)+'</span></div>'+
+        '<div class="meta">'+wnParts.join(' · ')+wnOverride+wnMarathon+wnBlocks+' · <a href="'+wn.issueUrl+'">issue</a></div>'+
+      '</div>';
+  }
+
+  fetch('./data.json').then(function(r){return r.json();}).then(function(data){
+    renderHeader(data);
+    document.getElementById('track').innerHTML=data.releases.map(columnHTML).join('');
+    initInteractions();
+  }).catch(function(err){
+    document.getElementById('track').innerHTML='<p style="padding:14px">Failed to load data.json: '+esc(err.message)+'</p>';
+  });
+})();
+
+/* ---- interaction wiring — runs once the track is populated ---- */
+function initInteractions(){
   var track=document.getElementById('track'),q=document.getElementById('q'),
       count=document.getElementById('qcount'),
       cards=[].slice.call(track.querySelectorAll('.lc')),
@@ -582,7 +466,7 @@ article[hidden]{display:none}
     requestAnimationFrame(function(){
       track.scrollLeft=Math.max(0,c.offsetLeft-track.offsetLeft-14);
     });}
-})();
+}
 </script>
 </body>
 </html>

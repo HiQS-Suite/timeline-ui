@@ -1,0 +1,524 @@
+{
+  "meta": {
+    "product": "helix-core",
+    "title": "Planning ledgers",
+    "subtitle": "helix-core · read-only",
+    "generatedAtDisplay": "2026-08-19 07:41:06Z"
+  },
+  "sync": {
+    "stale": true,
+    "sourceFile": "roadmap.md",
+    "sourceModifiedDisplay": "2026-08-19 09:52Z",
+    "lagDisplay": "2h 11m",
+    "rowsDiffer": 3,
+    "fixCommand": "ledger sync --from-md"
+  },
+  "telemetry": {
+    "dbGeneration": 412,
+    "receipts": 1284,
+    "lastSyncDisplay": "2026-08-19 07:41Z",
+    "lastSyncAgoDisplay": "2h 11m ago",
+    "rowParity": { "db": 20, "md": 23 },
+    "releasesOpen": 6,
+    "releasesTotal": 9,
+    "releasesOverdue": 1
+  },
+  "justFinished": {
+    "issue": "GH-70",
+    "title": "Snapshot restore verifies checksums before replaying the WAL",
+    "closedDateDisplay": "2026-08-14",
+    "closedAgoDisplay": "5 days ago",
+    "mergedInto": "Rampart 0.7.0",
+    "issueUrl": "https://github.com/helix/core/issues/70"
+  },
+  "whatsNext": {
+    "issue": "GH-75",
+    "title": "Rewrite the storage-layer fsync path",
+    "metrics": { "pri": 1, "sev": 3, "app": 12, "calc": 4 },
+    "metricFlags": { "pri": "hot", "sev": "hot", "calc": "hot" },
+    "override": { "value": 2, "hot": true },
+    "marathon": { "id": "GH-402", "url": "https://github.com/helix/core/issues/402", "phase": "p1" },
+    "blocks": { "text": "blocks Rampart (overdue)", "hot": true },
+    "issueUrl": "https://github.com/helix/core/issues/75"
+  },
+  "releases": [
+    {
+      "id": "c-0-5-0",
+      "slug": "keystone",
+      "name": "Keystone",
+      "version": "0.5.0",
+      "status": "shipped",
+      "flags": {},
+      "badge": { "type": "shipped", "label": "shipped" },
+      "dateLabel": "shipped",
+      "date": "2026-05-02",
+      "extra": null,
+      "itemsTotal": 8,
+      "itemsOpen": 0,
+      "milestoneUrl": "https://github.com/helix/core/milestone/12",
+      "milestoneRef": "m/12",
+      "exit": "Exit: first externally consumable build; API surface documented and a working quickstart.",
+      "detours": [],
+      "roadmap": [
+        {
+          "type": "card",
+          "id": "GH-52",
+          "title": "Retire the /v0 compatibility endpoints",
+          "marker": "done",
+          "section": "done",
+          "sectionLabel": "completed",
+          "note": "closed 2026-07-15",
+          "metrics": { "pri": 12, "sev": 20, "app": 30, "calc": 18 },
+          "metricFlags": { "pri": "bold" },
+          "links": { "issue": "https://github.com/helix/core/issues/52" },
+          "pills": [{ "label": "api" }, { "label": "breaking", "hot": true }]
+        }
+      ]
+    },
+    {
+      "id": "c-0-6-0",
+      "slug": "lantern",
+      "name": "Lantern",
+      "version": "0.6.0",
+      "status": "shipped",
+      "flags": {},
+      "badge": { "type": "shipped", "label": "shipped" },
+      "dateLabel": "shipped",
+      "date": "2026-06-18",
+      "extra": null,
+      "itemsTotal": 11,
+      "itemsOpen": 0,
+      "milestoneUrl": "https://github.com/helix/core/milestone/13",
+      "milestoneRef": "m/13",
+      "exit": "Exit: observability baseline — structured logs, metrics endpoint, and a runbook for the three known failure modes.",
+      "detours": [],
+      "roadmap": [
+        {
+          "type": "card",
+          "id": "GH-55",
+          "title": "Ledger schema v3 migration, with a reversible down path",
+          "marker": "done",
+          "section": "done",
+          "sectionLabel": "completed",
+          "note": "closed 2026-07-19",
+          "metrics": { "pri": 8, "sev": 15, "app": 22, "calc": 13 },
+          "metricFlags": { "pri": "bold", "sev": "bold", "calc": "bold" },
+          "links": { "issue": "https://github.com/helix/core/issues/55", "doc": "https://docs.helix.dev/rfc/0026-schema" },
+          "pills": [{ "label": "db" }, { "label": "migration" }]
+        },
+        {
+          "type": "card",
+          "id": "GH-59",
+          "title": "Nightly build matrix covers macOS arm64",
+          "marker": "done",
+          "section": "done",
+          "sectionLabel": "completed",
+          "note": "closed 2026-07-24",
+          "metrics": { "pri": 25, "sev": 34, "app": 28, "calc": 28 },
+          "metricFlags": {},
+          "links": { "issue": "https://github.com/helix/core/issues/59" },
+          "pills": [{ "label": "ci" }]
+        }
+      ]
+    },
+    {
+      "id": "c-0-6-3",
+      "slug": "tessellate",
+      "name": "Tessellate",
+      "version": "0.6.3",
+      "status": "shipped",
+      "flags": {},
+      "badge": { "type": "shipped", "label": "shipped" },
+      "dateLabel": "shipped",
+      "date": "2026-07-30",
+      "extra": null,
+      "itemsTotal": 4,
+      "itemsOpen": 0,
+      "milestoneUrl": "https://github.com/helix/core/milestone/14",
+      "milestoneRef": "m/14",
+      "exit": "Exit: changelog and release notes generated from the ledger, no hand editing.",
+      "detours": [],
+      "roadmap": [
+        {
+          "type": "card",
+          "id": "GH-61",
+          "title": "Release notes and changelog automation",
+          "marker": "done",
+          "section": "done",
+          "sectionLabel": "completed",
+          "note": "closed 2026-07-30",
+          "metrics": { "pri": 30, "sev": 45, "app": 24, "calc": 33 },
+          "metricFlags": {},
+          "links": { "issue": "https://github.com/helix/core/issues/61" },
+          "pills": [{ "label": "release" }, { "label": "automation" }]
+        },
+        {
+          "type": "card",
+          "id": "GH-64",
+          "title": "Drop the vendored yaml fork",
+          "marker": "done",
+          "section": "done",
+          "sectionLabel": "completed",
+          "note": "closed 2026-08-03",
+          "metrics": { "pri": 41, "sev": 58, "app": 47, "calc": 47 },
+          "metricFlags": {},
+          "links": { "issue": "https://github.com/helix/core/issues/64" },
+          "pills": [{ "label": "deps" }]
+        }
+      ]
+    },
+    {
+      "id": "c-0-7-0",
+      "slug": "rampart",
+      "name": "Rampart",
+      "version": "0.7.0",
+      "status": "active",
+      "flags": { "overdue": true },
+      "badge": { "type": "od", "label": "4 days overdue" },
+      "dateLabel": "target",
+      "date": "2026-08-15",
+      "extra": "4 days overdue",
+      "itemsTotal": 7,
+      "itemsOpen": 2,
+      "milestoneUrl": "https://github.com/helix/core/milestone/15",
+      "milestoneRef": "m/15",
+      "exit": "Exit: replication lag under 250ms at p99 for a 3-node cluster under sustained 5k writes/sec, with failover verified by the chaos suite on two consecutive nightly runs. Both remaining items are blocked on the storage-layer fsync rewrite (GH-75).",
+      "detours": [
+        {
+          "type": "card",
+          "id": "GH-88",
+          "title": "Hotfix: connection pool leaks a socket per cancelled request under TLS 1.3 renegotiation",
+          "marker": "wip",
+          "lead": true,
+          "section": "adhoc",
+          "sectionLabel": "ad-hoc detour",
+          "metrics": { "pri": 2, "sev": 1, "app": 44, "calc": 10 },
+          "metricFlags": { "pri": "hot", "sev": "hot", "calc": "bold" },
+          "override": { "value": 1, "hot": true },
+          "links": { "issue": "https://github.com/helix/core/issues/88", "doc": "https://docs.helix.dev/notes/gh-88" },
+          "pills": [{ "label": "bug", "hot": true }, { "label": "security", "hot": true }, { "label": "tls" }]
+        }
+      ],
+      "roadmap": [
+        {
+          "type": "marathon",
+          "id": "GH-402",
+          "title": "fsync durability chain",
+          "state": "run",
+          "meta": "2 phases · sequential · p1→p2",
+          "url": "https://github.com/helix/core/issues/402",
+          "cards": [
+            {
+              "type": "card",
+              "id": "GH-75",
+              "title": "Rewrite the storage-layer fsync path so durability guarantees hold on ext4 without the journal barrier",
+              "marker": "queued",
+              "lead": true,
+              "phase": "p1",
+              "section": "queue",
+              "sectionLabel": "queue",
+              "metrics": { "pri": 1, "sev": 3, "app": 12, "calc": 4 },
+              "metricFlags": { "pri": "hot", "sev": "hot", "calc": "hot" },
+              "override": { "value": 2, "hot": true },
+              "blocks": { "text": "blocks this release" },
+              "links": { "issue": "https://github.com/helix/core/issues/75", "doc": "https://docs.helix.dev/rfc/0031-fsync" },
+              "pills": [{ "label": "storage" }, { "label": "breaking-risk", "hot": true }, { "label": "rfc" }]
+            },
+            {
+              "type": "card",
+              "id": "GH-63",
+              "title": "Metrics exporter for the replication lag histogram",
+              "marker": "paused",
+              "phase": "p2",
+              "section": "queue",
+              "sectionLabel": "queue",
+              "note": "paused, waiting on GH-75",
+              "metrics": { "pri": 22, "sev": 31, "app": 38, "calc": 28 },
+              "metricFlags": {},
+              "links": { "issue": "https://github.com/helix/core/issues/63" },
+              "pills": [{ "label": "observability" }, { "label": "blocked", "hot": true }]
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "id": "GH-71",
+          "title": "Replication: cut p99 lag from 410ms to under 250ms at 5k writes/sec",
+          "marker": "wip",
+          "lead": true,
+          "section": "wip",
+          "sectionLabel": "in progress",
+          "note": "6 days",
+          "metrics": { "pri": 4, "sev": 6, "app": 9, "calc": 6 },
+          "metricFlags": { "pri": "hot", "sev": "bold", "calc": "bold" },
+          "links": { "issue": "https://github.com/helix/core/issues/71", "doc": "https://docs.helix.dev/rfc/0029-repl" },
+          "pills": [{ "label": "perf" }, { "label": "replication" }]
+        },
+        {
+          "type": "marathon",
+          "id": "GH-388",
+          "title": "snapshot + config hardening",
+          "state": "done",
+          "meta": "3 phases · p1→p3 · closed 2026-08-14",
+          "url": "https://github.com/helix/core/issues/388",
+          "cards": [
+            {
+              "type": "card",
+              "id": "GH-66",
+              "title": "Receipts table: index on (entity, generation) — 40× faster ledger reads",
+              "marker": "done",
+              "phase": "p1",
+              "section": "done",
+              "sectionLabel": "completed",
+              "note": "closed 2026-08-07",
+              "metrics": { "pri": 11, "sev": 17, "app": 8, "calc": 12 },
+              "metricFlags": { "pri": "bold", "calc": "bold" },
+              "links": { "issue": "https://github.com/helix/core/issues/66", "doc": "https://docs.helix.dev/notes/gh-66" },
+              "pills": [{ "label": "perf" }, { "label": "db" }]
+            },
+            {
+              "type": "card",
+              "id": "GH-68",
+              "title": "Config loader rejects unknown keys instead of silently ignoring them",
+              "marker": "done",
+              "phase": "p2",
+              "section": "done",
+              "sectionLabel": "completed",
+              "note": "closed 2026-08-11",
+              "metrics": { "pri": 19, "sev": 26, "app": 35, "calc": 24 },
+              "metricFlags": {},
+              "links": { "issue": "https://github.com/helix/core/issues/68" },
+              "pills": [{ "label": "config" }]
+            },
+            {
+              "type": "card",
+              "id": "GH-70",
+              "title": "Snapshot restore verifies checksums before replaying the WAL",
+              "marker": "done",
+              "phase": "p3",
+              "section": "done",
+              "sectionLabel": "completed",
+              "note": "closed 2026-08-14",
+              "metrics": { "pri": 5, "sev": 9, "app": 16, "calc": 8 },
+              "metricFlags": { "pri": "hot", "sev": "bold", "calc": "bold" },
+              "links": { "issue": "https://github.com/helix/core/issues/70" },
+              "pills": [{ "label": "storage" }, { "label": "reliability" }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c-0-7-1",
+      "slug": "bulwark",
+      "name": "Bulwark",
+      "version": "0.7.1",
+      "status": "active",
+      "flags": { "now": true },
+      "badge": { "type": "active", "label": "active" },
+      "dateLabel": "target",
+      "date": "2026-09-26",
+      "extra": "in 38 days",
+      "itemsTotal": 3,
+      "itemsOpen": 0,
+      "milestoneUrl": "https://github.com/helix/core/milestone/16",
+      "milestoneRef": "m/16",
+      "exit": "Exit: every public API surface carries a deprecation policy note, and the migration guide from 0.6.x passes a clean-room run by someone who did not write it.",
+      "detours": [
+        {
+          "type": "card",
+          "id": "GH-91",
+          "title": "Answer the security questionnaire from the platform team before their audit window closes",
+          "marker": "queued",
+          "section": "adhoc",
+          "sectionLabel": "ad-hoc detour",
+          "metrics": { "pri": 7, "sev": 12, "app": 61, "calc": 19 },
+          "metricFlags": { "pri": "bold", "sev": "bold" },
+          "override": { "value": 6, "hot": true },
+          "links": { "issue": "https://github.com/helix/core/issues/91" },
+          "pills": [{ "label": "process" }, { "label": "security", "hot": true }]
+        }
+      ],
+      "roadmap": [
+        {
+          "type": "marathon",
+          "id": "GH-407",
+          "title": "0.7.x API & docs",
+          "state": "run",
+          "meta": "2 phases · sequential · p1→p2",
+          "url": "https://github.com/helix/core/issues/407",
+          "cards": [
+            {
+              "type": "card",
+              "id": "GH-82",
+              "title": "Publish the 0.6.x → 0.7.x migration guide and have someone outside the team run it clean-room",
+              "marker": "queued",
+              "phase": "p1",
+              "section": "queue",
+              "sectionLabel": "queue",
+              "metrics": { "pri": 16, "sev": 24, "app": 11, "calc": 17 },
+              "metricFlags": {},
+              "links": { "issue": "https://github.com/helix/core/issues/82", "doc": "https://docs.helix.dev/migrate/07" },
+              "pills": [{ "label": "docs" }, { "label": "release" }]
+            },
+            {
+              "type": "card",
+              "id": "GH-84",
+              "title": "Deprecation policy note on every public API surface",
+              "marker": "queued",
+              "phase": "p2",
+              "section": "queue",
+              "sectionLabel": "queue",
+              "metrics": { "pri": 27, "sev": 40, "app": 33, "calc": 32 },
+              "metricFlags": {},
+              "links": { "issue": "https://github.com/helix/core/issues/84" },
+              "pills": [{ "label": "api" }, { "label": "docs" }]
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "id": "GH-77",
+          "title": "Ledger CLI: make sync idempotent and report a diff instead of overwriting",
+          "marker": "wip",
+          "section": "wip",
+          "sectionLabel": "in progress",
+          "note": "2 days",
+          "metrics": { "pri": 9, "sev": 18, "app": 14, "calc": 13 },
+          "metricFlags": { "pri": "bold", "calc": "bold" },
+          "links": { "issue": "https://github.com/helix/core/issues/77", "doc": "https://docs.helix.dev/notes/ledger-sync" },
+          "pills": [{ "label": "cli" }, { "label": "tooling" }]
+        }
+      ]
+    },
+    {
+      "id": "c-0-8-0",
+      "slug": "causeway",
+      "name": "Causeway",
+      "version": "0.8.0",
+      "status": "draft",
+      "flags": {},
+      "badge": { "type": "draft", "label": "draft" },
+      "dateLabel": "target",
+      "date": "2026-10-30",
+      "extra": "in 72 days",
+      "itemsTotal": 6,
+      "itemsOpen": 6,
+      "milestoneUrl": "https://github.com/helix/core/milestone/17",
+      "milestoneRef": "m/17",
+      "exit": "Exit: the ingest bridge accepts both wire formats behind a single endpoint, and the legacy shim can be removed without touching consumer code. Scope is deliberately loose until Rampart lands.",
+      "detours": [],
+      "roadmap": [
+        {
+          "type": "card",
+          "id": "GH-79",
+          "title": "Chaos suite: automate the two-node partition scenario currently run by hand",
+          "marker": "queued",
+          "section": "queue",
+          "sectionLabel": "queue",
+          "metrics": { "pri": 14, "sev": 21, "app": 26, "calc": 19 },
+          "metricFlags": { "pri": "bold" },
+          "links": { "issue": "https://github.com/helix/core/issues/79", "doc": "https://docs.helix.dev/notes/chaos" },
+          "pills": [{ "label": "testing" }, { "label": "infra" }]
+        },
+        {
+          "type": "card",
+          "id": "GH-86",
+          "title": "Ingest bridge: accept both wire formats behind one endpoint",
+          "marker": "queued",
+          "section": "queue",
+          "sectionLabel": "queue",
+          "metrics": { "pri": 31, "sev": 29, "app": 20, "calc": 28 },
+          "metricFlags": {},
+          "links": { "issue": "https://github.com/helix/core/issues/86", "doc": "https://docs.helix.dev/rfc/0034-bridge" },
+          "pills": [{ "label": "ingest" }, { "label": "rfc" }]
+        }
+      ]
+    },
+    {
+      "id": "c-0-9-0",
+      "slug": "drawbridge",
+      "name": "Drawbridge",
+      "version": "0.9.0",
+      "status": "draft",
+      "flags": {},
+      "badge": { "type": "draft", "label": "draft" },
+      "dateLabel": "target",
+      "date": "2026-12-11",
+      "extra": "in 114 days",
+      "itemsTotal": 5,
+      "itemsOpen": 5,
+      "milestoneUrl": "https://github.com/helix/core/milestone/18",
+      "milestoneRef": "m/18",
+      "exit": "Exit: external plugins load from a signed bundle with no build step, and a third-party author can go from empty directory to running plugin using only published docs.",
+      "detours": [],
+      "roadmap": [
+        {
+          "type": "card",
+          "id": "GH-80",
+          "title": "Docs site: switch to generated API reference",
+          "marker": "wip",
+          "section": "wip",
+          "sectionLabel": "in progress",
+          "note": "11 days",
+          "metrics": { "pri": 35, "sev": 52, "app": 19, "calc": 37 },
+          "metricFlags": {},
+          "links": { "issue": "https://github.com/helix/core/issues/80" },
+          "pills": [{ "label": "docs" }, { "label": "infra" }]
+        }
+      ]
+    },
+    {
+      "id": "c-1-0-0",
+      "slug": "portcullis",
+      "name": "Portcullis",
+      "version": "1.0.0",
+      "status": "draft",
+      "flags": {},
+      "badge": { "type": "draft", "label": "draft" },
+      "dateLabel": "target",
+      "date": "2027-02-26",
+      "extra": "in 191 days",
+      "itemsTotal": 9,
+      "itemsOpen": 9,
+      "milestoneUrl": "https://github.com/helix/core/milestone/19",
+      "milestoneRef": "m/19",
+      "exit": "Exit: semver commitment published; no breaking change ships without a two-release deprecation window. The API freeze review has to be signed off by all three maintainers.",
+      "detours": [],
+      "roadmap": [
+        {
+          "type": "card",
+          "id": "GH-90",
+          "title": "Intake: user report of nondeterministic ordering in the change feed — unreproduced, needs triage",
+          "marker": "queued",
+          "section": "deferred",
+          "sectionLabel": "deferred · vision",
+          "metrics": { "pri": 68, "sev": 44, "app": 77, "calc": 63 },
+          "metricFlags": {},
+          "override": { "value": 88, "hot": false },
+          "links": { "issue": "https://github.com/helix/core/issues/90" },
+          "pills": [{ "label": "triage" }, { "label": "needs-repro", "hot": true }]
+        }
+      ]
+    },
+    {
+      "id": "c-1-1-0",
+      "slug": "barbican",
+      "name": "Barbican",
+      "version": "1.1.0",
+      "status": "draft",
+      "flags": {},
+      "badge": { "type": "draft", "label": "draft" },
+      "dateLabel": "target",
+      "date": "2027-05-14",
+      "extra": "in 268 days",
+      "itemsTotal": 2,
+      "itemsOpen": 2,
+      "milestoneUrl": "https://github.com/helix/core/milestone/20",
+      "milestoneRef": "m/20",
+      "exit": "Exit: not yet written. Placeholder milestone so post-1.0 work has somewhere to land.",
+      "detours": [],
+      "roadmap": []
+    }
+  ]
+}
